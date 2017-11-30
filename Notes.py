@@ -1,4 +1,5 @@
-'''Devin
+'''
+Devin
 
 a = 4
 b = 3
@@ -48,7 +49,7 @@ def print_age(name, age):
 
 def algebra_hw(x):
     return x ** 3 + 4 + x + +2 + 7 * x - 4
-'''
+
 def grade_calc(percentage):
     if percentage >= 90:
         return "A"
@@ -62,3 +63,24 @@ def grade_calc(percentage):
         return "F"
 
 print(grade_calc(90))
+
+def happy_bday(name):
+    print("Happy Birthday to you! \nHappy Birthday to you! \nHappy Birthday dear %s! \nHappy Birthday to you!" % name)
+
+
+happy_bday("Devin")
+
+# Loops
+
+for i in range(0, 11):
+    print(i)
+
+a = 1
+while a < 10:
+    print(a)
+    a += 1
+'''
+
+# Random Numbers
+import random #This should be on line 1
+print(random.randint(0, 1000))
