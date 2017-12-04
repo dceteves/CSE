@@ -1,5 +1,5 @@
 '''
-Devin
+# Devin
 
 a = 4
 b = 3
@@ -79,8 +79,18 @@ a = 1
 while a < 10:
     print(a)
     a += 1
-'''
+
 
 # Random Numbers
 import random #This should be on line 1
 print(random.randint(0, 1000))
+
+c = '1'
+print(c == 1) # False: comparing different strings; string ≠ integer
+print(int(c) == 1)
+print(c == str(1))
+'''
+
+# Comparisons
+print(1 == 1) # Use a double equal sign (==)
+print(1 != 2) # 1 is not equal to 2
