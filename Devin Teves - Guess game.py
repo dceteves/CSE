@@ -15,8 +15,6 @@ while guesses != 0:
         elif int(guess) > number:
             guesses -= 1
             guess = input("That's too high. Try again. \nGuesses left: %s >" % guesses)
-        elif str(guess) != int(guess):
-            guess = input("That's not a number! Try again. >")
 
 print("You ran out of guesses! My number was %s. \nGame over." % number)
 
