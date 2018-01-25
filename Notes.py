@@ -89,8 +89,61 @@ c = '1'
 print(c == 1) # False: comparing different strings; string ≠ integer
 print(int(c) == 1)
 print(c == str(1))
-'''
 
 # Comparisons
 print(1 == 1) # Use a double equal sign (==)
 print(1 != 2) # 1 is not equal to 2
+
+# Lists
+count = [1, 2, 3, 4, 5]
+cheeseburger_ingredients = ['cheese', 'beef', 'sauce', 'sesame seed bun', 'avocado', 'onion']
+# print(cheeseburger_ingredients[0])
+# print(cheeseburger_ingredients[3])
+# print(len(cheeseburger_ingredients))
+# print(len(count))
+
+# Going through lists
+for num in cheeseburger_ingredients:
+    print(num)
+
+for num in count:
+    print(num * 2)
+
+length = len(cheeseburger_ingredients)
+range(5) # list w/ numbers 0 - 4
+range(len(cheeseburger_ingredients)) # generates a list of all indices
+
+for num in range(len(cheeseburger_ingredients)):
+    item = cheeseburger_ingredients[num]
+    print("The item at index %d is %s." % (num, item))
+
+# Recasting into a list
+strOne = "Hello World!"
+listOne = list(strOne)
+print(listOne)
+listOne[11] = '.'
+print(listOne)
+print(listOne[-1])
+
+
+# Adding things to a list
+cheeseburger_ingredients.append("Fries")
+print(cheeseburger_ingredients)
+cheeseburger_ingredients.append("burger")
+print(cheeseburger_ingredients)
+cheeseburger_ingredients.pop(1)
+print(cheeseburger_ingredients)
+cheeseburger_ingredients.remove("cheese")
+print(cheeseburger_ingredients)
+'''
+
+# Getting the alphabet
+import string
+print(string.ascii_letters)
+print(string.ascii_lowercase)
+print(string.punctuation)
+
+# Making things Lowercase
+str2 = "ThIs iS a vEry oDd seNTencE"
+print(str2.lower())
+
