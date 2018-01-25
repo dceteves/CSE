@@ -11,31 +11,28 @@ import string
 word_bank = ["special", "computer", "python", "programming", "burger",
              "tablet", "pycharm", "github", "edison", "javascript"]
 guesses = 10
-guesses_taken = []
-random_word = random.choice(word_bank)
-# random_word = "programming"
-random_word.lower()
-wordlist = []
-display_wordlist = []
-for letter in random_word:
-    wordlist.append(letter)
-    display_wordlist.append("*")
-
+guessesTaken = []
+# random_word = random.choice(word_bank)
+random_word = "programming"
+random_word = random_word.lower()
+wordList = list(random_word)
 input("Press enter to play Hangman")
-
+display_wordList = []
 while guesses != 0:
-    print(wordlist)
-    print(display_wordlist)
-    print(''.join(display_wordlist))
-    if len(wordlist) == 0:
+
+    print(wordList)
+    print(display_wordList)
+    print(''.join(display_wordList))
+    if len(wordList) == 0:
         break
     guess = input("Guess a letter >")
-    guesses_taken.append(guess)
-    for letter in wordlist:
+    guessesTaken.append(guess)
+    for letter in wordList:
         if guess == letter:
-            wordlist.remove(guess)
-        display_wordlist[random_word.index(guess)] = guess
-
+            display_wordList.append(guess)
+        else:
+            if letter != "*":
+                display_wordList.append("*")
 
 
 
