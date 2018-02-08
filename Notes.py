@@ -89,8 +89,15 @@ c = '1'
 print(c == 1) # False: comparing different strings; string ≠ integer
 print(int(c) == 1)
 print(c == str(1))
-'''
 
 # Comparisons
 print(1 == 1) # Use a double equal sign (==)
 print(1 != 2) # 1 is not equal to 2
+'''
+
+a = 'hello'
+b = list(a)
+b[:] = "*"
+print(b)
+
+
