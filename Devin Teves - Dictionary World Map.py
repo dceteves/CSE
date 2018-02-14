@@ -17,7 +17,8 @@ world_map = {
     },
 }
 """
-uso_map = {
+
+uso_worldMap = {
     "BEDROOM": {
         "NAME": "Bedroom",
         "DESCRIPTION": "You are in a bedroom full of anime posters, figures, etc."
@@ -33,8 +34,7 @@ uso_map = {
                        "On the computer lies a weird game called 'osu!'...",
         "PATHS": {
             "EAST": "HALLWAY",
-            "SOUTH": "BEDROOM",
-            "PLAY OSU": "OSU"
+            "SOUTH": "BEDROOM"
         }
     },
     "HALLWAY": {
@@ -53,7 +53,7 @@ uso_map = {
         "DESCRIPTION": "The bathroom is set with two sinks, a bathtub and a toilet. "
                        "There are also toiletries sitting on top of the sink counter.",
         "PATHS": {
-            "EAST": "HALLWAY"
+            "WEST": "HALLWAY"
         }
     },
     "DINING ROOM": {
@@ -81,8 +81,17 @@ uso_map = {
                        "laundry room to the west as well as a slide door leading outside east.",
         "PATHS": {
             "WEST": "LAUNDRY ROOM",
-            "EAST": "BACKYARD",
-            "SOUTH": "LOUNGE ROOM"
+            "EAST": "BACKYARD1",
+            "SOUTH": "LOUNGE ROOM",
+            "NORTH": "KITCHEN1"
+        }
+    },
+    "BACKYARD2": {
+        "NAME": "Farther side of the Backyard",
+        "DESCRIPTION": "This side of the backyard has an unused grill and a bench lying at the wall of the house. And "
+                       "more tennis balls...",
+        "PATHS": {
+            "SOUTH": "BACKYARD1"
         }
     },
     "LAUNDRY ROOM": {
@@ -97,21 +106,82 @@ uso_map = {
     "CABINET": {
         "NAME": "Inside of Cabinet",
         "DESCRIPTION": "Inside the cabinet contains jackets and sweaters. The shelf above it has a few boxes put for "
-                       "storage, but there's a paper mask of a man's face with glasses smiling and squinting his eyes...",
+                       "storage, but there's a paper mask of a man's face with glasses smiling and squinting his "
+                       "eyes...",
         "PATHS": {
-            "SOUTH": "LAUNDRY ROOM"
+            "SOUTH": "LAUNDRY ROOM",
+            "EAST": "KITCHEN2"
         }
     },
-    "BACKYARD": {
+    "BACKYARD1": {
         "NAME": "Backyard",
-        "DESCRIPTION": "The empty backyard little to no grass, making it look like a desert. Not only that, there are "
-                       "two dogs that seem to not care about it at all and just have fun with the tennis balls around them.",
+        "DESCRIPTION": "The empty backyard had little to no grass, making it look like a desert. Not only that, there "
+                       "are two dogs that seem to not care about it at all and just have fun with the tennis balls "
+                       "around them.",
         "PATHS": {
-            "WEST": "KITCHEN2"
+            "WEST": "KITCHEN2",
+            "NORTH": "BACKYARD2"
         }
     },
     "LIVING ROOM": {
         "NAME": "Living Room",
-        "DESCRIPTION": "The living room had couches set with a large TV."
+        "DESCRIPTION": "The living room has couches set with a large TV.\nThe exit seems to go the east, as well as a "
+                       "door to the south.",
+        "PATHS": {
+            "EAST": "DINING ROOM",
+            "WEST": "DOOR",
+            "SOUTH": "LOCKED DOOR"
+        }
+    },
+    "DOOR": {
+        "NAME": "Door",
+        "DESCRIPTION": "You stand at the exit of the house, where lies a bunch of shoes.\nThe door faces south.",
+        "PATHS": {
+            "NORTH": "LIVING ROOM",
+            "SOUTH": "PORCH"
+        }
+    },
+    "PORCH": {
+        "NAME": "Porch",
+        "DESCRIPTION": "You exit the house  into the porch, where there are short, dull, plants.\nYou can go south to "
+                       "exit the porch and into the driveway.",
+        "PATHS": {
+            "SOUTH": "DRIVEWAY",
+            "NORTH": "DOOR"
+        }
+    },
+    "DRIVEWAY": {
+        "NAME": "Driveway",
+        "DESCRIPTION": "The drive way has a basketball hoop, but to the south you see a store with a sign that says... "
+                       "Walm.",
+        "PATHS": {
+            "WEST": "PORCH",
+            "SOUTH": "STORE"
+        }
+    },
+    "STORE": {
+        "NAME": "Walm",
+        "DESCRIPTION": "Sorry to keep your hopes up, this store is closed.",
+        "PATHS": {
+            "NORTH": "DRIVEWAY"
+        }
     }
 }
+current_node = uso_worldMap['BEDROOM']
+directions = ['NORTH', 'SOUTH', 'EAST', 'WEST']
+
+while True:
+    print(current_node['NAME'])
+    print(current_node['DESCRIPTION'])
+    command = input('>_')
+    if command == 'quit':
+        quit(0)
+    if command in directions:
+        try:
+            name_of_node = current_node['PATHS'][command]
+            current_node = uso_worldMap[name_of_node]
+        except KeyError:
+            print("You cannot go this way.")
+
+    else:
+        print("Command not Recognized")
