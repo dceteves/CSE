@@ -1,6 +1,7 @@
 import time
 import random
 
+# colored text
 PURPLE = '\033[95m'
 CYAN = '\033[96m'
 DARKCYAN = '\033[36m'
@@ -11,20 +12,28 @@ RED = '\033[91m'
 BOLD = '\033[1m'
 UNDERLINE = '\033[4m'
 END = '\033[0m'
-"""      ^
-colored text    
-"""
+
 
 class Room(object):
     def __init__(self, name, description, north, south, east, west, up, down):
         self.NAME = name
         self.DESCRIPTION = description
         self.NORTH = north
+        self.N = north
         self.SOUTH = south
+        self.S = south
         self.WEST = west
+        self.W = west
         self.EAST = east
+        self.E = east
         self.UP = up
+        self.U = up
         self.DOWN = down
+        self.D = down
+        self.looping_oof = ["oof"]
+        self.counter = 0
+        self.ping_phrases = ['pls', 'pls stop', 'pls stop doing this', 'pls just continue the game',
+                             'just play the game', 'y u do dys', 'stop', 'stop doing this']
 
     def print_descriptions(self):
         print(BLUE + self.NAME + END)
@@ -37,42 +46,37 @@ class Room(object):
     def jump(self):
         if current_node == BEDROOM or current_node == LIVING_ROOM:
             print(BOLD + "oh woop there's a ceiling fan there" + END)
-            time.sleep(.5)
+            time.sleep(1)
             print(RED + "You hit the ceiling fan while it was on. Your head gets chopped off" + END)
+            quit(0)
+        else:
+            print(RED + BOLD + "ow" + END)
+            time.sleep(.5)
 
     def oof(self):
-        looping_oof = "oof"
-        print(looping_oof)
+        print(BOLD + "".join(self.looping_oof) + END)
         time.sleep(.5)
-        looping_oof += "oof"
-        return looping_oof
+        self.looping_oof.append("oof")
 
     def ping(self):
-        counter = 0
-        phrases = ['pls', 'pls stop', 'pls stop doing this', 'pls just continue the game']
-        if counter == 0:
-            counter += 1
-            return counter
-            print(UNDERLINE + BOLD + "pong" + END)
-            time.sleep(.5)
-        elif counter == 4:
-            counter += 1
-            print(BOLD + "You seriously wanna waste your time doing this?")
-            time.sleep(.3)
-        elif counter == 5:
-            counter += 1
-            return counter
-            print(".")
-            time.sleep(.5)
-            print(".")
-            time.sleep(.5)
-            print(".")
-            time.sleep(.5)
-            print("k")
-            time.sleep(.3)
-        elif counter >= 10:
-            print(CYAN + random.choice(phrases) + END)
-            time.sleep(.5)
+        if self.counter <= 2:
+            print(BOLD + UNDERLINE + "pong" + END)
+            self.counter += 1
+        elif self.counter == 3:
+            print(GREEN + BOLD + "You really wanna waste your time doing this?" + END)
+            self.counter += 1
+        elif self.counter == 4:
+            print(YELLOW + BOLD + "pls you have more important things other than this" + END)
+            self.counter += 1
+        elif self.counter == 5:
+            print(CYAN + BOLD + "pls" + END)
+            self.counter += 1
+        elif self.counter >= 6 and self.counter <= 9:
+            print(BOLD + RED + random.choice(self.ping_phrases) + END)
+            self.counter += 1
+        elif self.counter == 10:
+            print(RED + BOLD + "You typed in ping too much that the game got tired of you and decided to quit")
+            quit(0)
 
 BEDROOM = Room("Bedroom",
                "You are in a bedroom full of anime posters, figures, etc."
@@ -150,22 +154,37 @@ STORE = Room("Walm",
              "Sorry to keep your hopes up, this store is closed.",
              None, None, "DRIVEWAY", None, None, None)
 
-dir1 = ['NORTH', 'SOUTH', 'EAST', 'WEST', 'UP', 'DOWN']
+dir1 = ['NORTH', 'SOUTH', 'EAST', 'WEST', 'UP', 'DOWN',
+        "N", "S", "E", "W", "U", "D"]
 
 current_node = BEDROOM
+current_node_hasChanged = True
 while True:
-    current_node.print_descriptions()
+    if current_node_hasChanged  == True:
+        current_node.print_descriptions()
+        current_node_hasChanged = False
     command = input('>')
-    if command == 'quit':
+    if command.lower() == 'quit':
         quit(0)
+    elif command.lower() == 'look' or command.lower == 'l':
+        current_node.print_descriptions()
+        current_node_hasChanged = False
+    elif command.lower() == "jump":
+        current_node.jump()
+        current_node_hasChanged = False
     elif command.lower() == "oof":
         current_node.oof()
+        current_node_hasChanged = False
     elif command.lower() == "ping":
         current_node.ping()
+        current_node_hasChanged = False
     elif command.upper() in dir1:
         try:
             current_node.move(command.upper())
+            current_node_hasChanged = True
         except KeyError:
             print(RED + "You can't go that way." + END)
+            current_node_hasChanged = False
     else:
         print("Command not Recognized")
+        current_node_hasChanged = False
